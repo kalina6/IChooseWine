@@ -24,10 +24,10 @@ Program powstanie w języku C++ używając programu Visual Studio i jego bibliot
 - SQLite;
 
 ## Harmonogram:
-1. Stworzenie Menu głównego
-2. Stworzenie formularza do dodawania wina
-3. Utworzenie bazy danych do przechowywania informacji
-4. Utworzenie widoku katalogu z winami dodanymi poprzez tamten formularz
-5. Zrobienie wirtualnej piwnicy
-6. Utworzenie połączenia pomiędzy wszystkimi funkcjonalnościami
-7. Utworzenie ostatniej funkcjonalności, którą jest skarbnica podstawowej wiedzy o winie
+1. Stworzenie Menu głównego.
+2. Stworzenie formularza do dodawania wina.
+3. Utworzenie bazy danych do przechowywania informacji.
+4. Utworzenie widoku katalogu z winami dodanymi poprzez tamten formularz.
+5. Utworzenie wirtualnej piwnicy.
+6. Utworzenie połączenia pomiędzy wszystkimi funkcjonalnościami.
+7. Utworzenie ostatniej funkcjonalności, czyli bazy podstawowej wiedzy o winie.
