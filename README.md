@@ -2,8 +2,7 @@
 Program poświęcony tematyce wina.
 
 ## Funkcjonalność programu:
-Program będzie poświęcony tematyce wina. Jego główną funkcjonalnością 
-będzie katalogowanie wina poprzez dane wprowadzone ręcznie przez użytkownika.
+Główną funkcjonalnością programu będzie katalogowanie wina poprzez dane wprowadzone ręcznie przez użytkownika.
 Osoba będzie mogła stworzyć bazę win na podstawie wprowadzanych cech
 danego napoju, m.in. podstawowe czyli: wgranie zdjęcia etykiety ; cena ; miejsce zakupu;
 smak; propozycja podania itp. oraz rozszerzone : szczep, producent i więcej.
