@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <string>
 
 namespace Ichoosewine {
 
@@ -8,6 +10,8 @@ namespace Ichoosewine {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Data::SqlClient;
+	using namespace MySql::Data::MySqlClient;
 
 	/// <summary>
 	/// Summary for MyForm1
@@ -64,6 +68,7 @@ namespace Ichoosewine {
 	
 	private:System::Windows::Forms::OpenFileDialog^ ofd;
 	private: System::Windows::Forms::RichTextBox^  richTextBox1;
+	private: System::Windows::Forms::CheckBox^  checkBox1;
 
 	private:
 		/// <summary>
@@ -106,6 +111,7 @@ namespace Ichoosewine {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->ofd = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -114,18 +120,20 @@ namespace Ichoosewine {
 			this->textBox1->BackColor = System::Drawing::Color::Red;
 			this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox1->Location = System::Drawing::Point(124, 23);
+			this->textBox1->Location = System::Drawing::Point(165, 28);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(139, 26);
+			this->textBox1->Size = System::Drawing::Size(184, 30);
 			this->textBox1->TabIndex = 0;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::Color::Transparent;
-			this->label1->Location = System::Drawing::Point(24, 36);
+			this->label1->Location = System::Drawing::Point(32, 44);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(38, 13);
+			this->label1->Size = System::Drawing::Size(47, 17);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"NAME";
 			this->label1->Click += gcnew System::EventHandler(this, &MyForm1::label1_Click);
@@ -134,9 +142,10 @@ namespace Ichoosewine {
 			// 
 			this->label2->AutoSize = true;
 			this->label2->BackColor = System::Drawing::Color::Transparent;
-			this->label2->Location = System::Drawing::Point(19, 73);
+			this->label2->Location = System::Drawing::Point(25, 90);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(47, 13);
+			this->label2->Size = System::Drawing::Size(58, 17);
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"STRAIN";
 			// 
@@ -144,9 +153,10 @@ namespace Ichoosewine {
 			// 
 			this->label3->AutoSize = true;
 			this->label3->BackColor = System::Drawing::Color::Transparent;
-			this->label3->Location = System::Drawing::Point(21, 105);
+			this->label3->Location = System::Drawing::Point(28, 129);
+			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(60, 13);
+			this->label3->Size = System::Drawing::Size(76, 17);
 			this->label3->TabIndex = 3;
 			this->label3->Text = L"COUNTRY";
 			// 
@@ -154,9 +164,10 @@ namespace Ichoosewine {
 			// 
 			this->label4->AutoSize = true;
 			this->label4->BackColor = System::Drawing::Color::Transparent;
-			this->label4->Location = System::Drawing::Point(21, 205);
+			this->label4->Location = System::Drawing::Point(28, 252);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(84, 13);
+			this->label4->Size = System::Drawing::Size(106, 17);
 			this->label4->TabIndex = 4;
 			this->label4->Text = L"TYPE OF WINE";
 			// 
@@ -164,9 +175,10 @@ namespace Ichoosewine {
 			// 
 			this->label5->AutoSize = true;
 			this->label5->BackColor = System::Drawing::Color::Transparent;
-			this->label5->Location = System::Drawing::Point(21, 239);
+			this->label5->Location = System::Drawing::Point(28, 294);
+			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(74, 13);
+			this->label5->Size = System::Drawing::Size(100, 17);
 			this->label5->TabIndex = 5;
 			this->label5->Text = L"ALCOHOL (%)";
 			// 
@@ -174,9 +186,10 @@ namespace Ichoosewine {
 			// 
 			this->label6->AutoSize = true;
 			this->label6->BackColor = System::Drawing::Color::Transparent;
-			this->label6->Location = System::Drawing::Point(277, 459);
+			this->label6->Location = System::Drawing::Point(369, 565);
+			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(98, 13);
+			this->label6->Size = System::Drawing::Size(128, 17);
 			this->label6->TabIndex = 6;
 			this->label6->Text = L"PHOTO OF LABEL";
 			// 
@@ -184,9 +197,10 @@ namespace Ichoosewine {
 			// 
 			this->label7->AutoSize = true;
 			this->label7->BackColor = System::Drawing::Color::Transparent;
-			this->label7->Location = System::Drawing::Point(21, 303);
+			this->label7->Location = System::Drawing::Point(28, 373);
+			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(39, 13);
+			this->label7->Size = System::Drawing::Size(48, 17);
 			this->label7->TabIndex = 7;
 			this->label7->Text = L"PRICE";
 			// 
@@ -194,9 +208,10 @@ namespace Ichoosewine {
 			// 
 			this->label8->AutoSize = true;
 			this->label8->BackColor = System::Drawing::Color::Transparent;
-			this->label8->Location = System::Drawing::Point(21, 337);
+			this->label8->Location = System::Drawing::Point(28, 415);
+			this->label8->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(37, 13);
+			this->label8->Size = System::Drawing::Size(47, 17);
 			this->label8->TabIndex = 8;
 			this->label8->Text = L"SHOP";
 			// 
@@ -204,9 +219,10 @@ namespace Ichoosewine {
 			// 
 			this->label9->AutoSize = true;
 			this->label9->BackColor = System::Drawing::Color::Transparent;
-			this->label9->Location = System::Drawing::Point(21, 169);
+			this->label9->Location = System::Drawing::Point(28, 208);
+			this->label9->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(93, 13);
+			this->label9->Size = System::Drawing::Size(119, 17);
 			this->label9->TabIndex = 9;
 			this->label9->Text = L"COLOR OF WINE";
 			// 
@@ -214,9 +230,10 @@ namespace Ichoosewine {
 			// 
 			this->label10->AutoSize = true;
 			this->label10->BackColor = System::Drawing::Color::Transparent;
-			this->label10->Location = System::Drawing::Point(24, 271);
+			this->label10->Location = System::Drawing::Point(32, 334);
+			this->label10->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(36, 13);
+			this->label10->Size = System::Drawing::Size(45, 17);
 			this->label10->TabIndex = 10;
 			this->label10->Text = L"YEAR";
 			// 
@@ -224,9 +241,10 @@ namespace Ichoosewine {
 			// 
 			this->label11->AutoSize = true;
 			this->label11->BackColor = System::Drawing::Color::Transparent;
-			this->label11->Location = System::Drawing::Point(19, 376);
+			this->label11->Location = System::Drawing::Point(25, 463);
+			this->label11->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(91, 13);
+			this->label11->Size = System::Drawing::Size(116, 17);
 			this->label11->TabIndex = 11;
 			this->label11->Text = L"HOW TO SERVE";
 			// 
@@ -234,9 +252,10 @@ namespace Ichoosewine {
 			// 
 			this->label12->AutoSize = true;
 			this->label12->BackColor = System::Drawing::Color::Transparent;
-			this->label12->Location = System::Drawing::Point(19, 137);
+			this->label12->Location = System::Drawing::Point(25, 169);
+			this->label12->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(75, 13);
+			this->label12->Size = System::Drawing::Size(95, 17);
 			this->label12->TabIndex = 12;
 			this->label12->Text = L"PRODUCENT";
 			// 
@@ -245,9 +264,10 @@ namespace Ichoosewine {
 			this->textBox2->BackColor = System::Drawing::Color::Red;
 			this->textBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox2->Location = System::Drawing::Point(124, 60);
+			this->textBox2->Location = System::Drawing::Point(165, 74);
+			this->textBox2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(139, 26);
+			this->textBox2->Size = System::Drawing::Size(184, 30);
 			this->textBox2->TabIndex = 13;
 			// 
 			// textBox3
@@ -255,9 +275,10 @@ namespace Ichoosewine {
 			this->textBox3->BackColor = System::Drawing::Color::Red;
 			this->textBox3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox3->Location = System::Drawing::Point(125, 92);
+			this->textBox3->Location = System::Drawing::Point(167, 113);
+			this->textBox3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(138, 26);
+			this->textBox3->Size = System::Drawing::Size(183, 30);
 			this->textBox3->TabIndex = 14;
 			// 
 			// textBox4
@@ -265,9 +286,10 @@ namespace Ichoosewine {
 			this->textBox4->BackColor = System::Drawing::Color::Red;
 			this->textBox4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox4->Location = System::Drawing::Point(124, 124);
+			this->textBox4->Location = System::Drawing::Point(165, 153);
+			this->textBox4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(139, 26);
+			this->textBox4->Size = System::Drawing::Size(184, 30);
 			this->textBox4->TabIndex = 15;
 			this->textBox4->TextChanged += gcnew System::EventHandler(this, &MyForm1::textBox4_TextChanged);
 			// 
@@ -276,9 +298,10 @@ namespace Ichoosewine {
 			this->textBox5->BackColor = System::Drawing::Color::Red;
 			this->textBox5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox5->Location = System::Drawing::Point(125, 156);
+			this->textBox5->Location = System::Drawing::Point(167, 192);
+			this->textBox5->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(138, 26);
+			this->textBox5->Size = System::Drawing::Size(183, 30);
 			this->textBox5->TabIndex = 16;
 			// 
 			// textBox6
@@ -286,9 +309,10 @@ namespace Ichoosewine {
 			this->textBox6->BackColor = System::Drawing::Color::Red;
 			this->textBox6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox6->Location = System::Drawing::Point(124, 192);
+			this->textBox6->Location = System::Drawing::Point(165, 236);
+			this->textBox6->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(139, 26);
+			this->textBox6->Size = System::Drawing::Size(184, 30);
 			this->textBox6->TabIndex = 17;
 			// 
 			// textBox7
@@ -296,9 +320,10 @@ namespace Ichoosewine {
 			this->textBox7->BackColor = System::Drawing::Color::Red;
 			this->textBox7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox7->Location = System::Drawing::Point(124, 226);
+			this->textBox7->Location = System::Drawing::Point(165, 278);
+			this->textBox7->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox7->Name = L"textBox7";
-			this->textBox7->Size = System::Drawing::Size(139, 26);
+			this->textBox7->Size = System::Drawing::Size(184, 30);
 			this->textBox7->TabIndex = 18;
 			// 
 			// textBox8
@@ -306,9 +331,10 @@ namespace Ichoosewine {
 			this->textBox8->BackColor = System::Drawing::Color::Red;
 			this->textBox8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox8->Location = System::Drawing::Point(124, 258);
+			this->textBox8->Location = System::Drawing::Point(165, 318);
+			this->textBox8->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox8->Name = L"textBox8";
-			this->textBox8->Size = System::Drawing::Size(139, 26);
+			this->textBox8->Size = System::Drawing::Size(184, 30);
 			this->textBox8->TabIndex = 19;
 			// 
 			// textBox9
@@ -316,9 +342,10 @@ namespace Ichoosewine {
 			this->textBox9->BackColor = System::Drawing::Color::Red;
 			this->textBox9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox9->Location = System::Drawing::Point(124, 290);
+			this->textBox9->Location = System::Drawing::Point(165, 357);
+			this->textBox9->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox9->Name = L"textBox9";
-			this->textBox9->Size = System::Drawing::Size(139, 26);
+			this->textBox9->Size = System::Drawing::Size(184, 30);
 			this->textBox9->TabIndex = 20;
 			// 
 			// textBox10
@@ -326,16 +353,18 @@ namespace Ichoosewine {
 			this->textBox10->BackColor = System::Drawing::Color::Red;
 			this->textBox10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox10->Location = System::Drawing::Point(124, 324);
+			this->textBox10->Location = System::Drawing::Point(165, 399);
+			this->textBox10->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox10->Name = L"textBox10";
-			this->textBox10->Size = System::Drawing::Size(139, 26);
+			this->textBox10->Size = System::Drawing::Size(184, 30);
 			this->textBox10->TabIndex = 21;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(222, 553);
+			this->button1->Location = System::Drawing::Point(296, 681);
+			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(100, 38);
+			this->button1->Size = System::Drawing::Size(133, 47);
 			this->button1->TabIndex = 23;
 			this->button1->Text = L"SAVE";
 			this->button1->UseVisualStyleBackColor = true;
@@ -343,17 +372,19 @@ namespace Ichoosewine {
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->Location = System::Drawing::Point(280, 209);
+			this->pictureBox1->Location = System::Drawing::Point(373, 257);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(217, 229);
+			this->pictureBox1->Size = System::Drawing::Size(289, 282);
 			this->pictureBox1->TabIndex = 24;
 			this->pictureBox1->TabStop = false;
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(400, 454);
+			this->button2->Location = System::Drawing::Point(533, 559);
+			this->button2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->Size = System::Drawing::Size(100, 28);
 			this->button2->TabIndex = 25;
 			this->button2->Text = L"OPEN";
 			this->button2->UseVisualStyleBackColor = true;
@@ -364,18 +395,30 @@ namespace Ichoosewine {
 			this->richTextBox1->BackColor = System::Drawing::Color::Red;
 			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->richTextBox1->Location = System::Drawing::Point(124, 376);
+			this->richTextBox1->Location = System::Drawing::Point(165, 463);
+			this->richTextBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(139, 154);
+			this->richTextBox1->Size = System::Drawing::Size(184, 189);
 			this->richTextBox1->TabIndex = 26;
 			this->richTextBox1->Text = L"";
 			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Location = System::Drawing::Point(373, 28);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(182, 21);
+			this->checkBox1->TabIndex = 27;
+			this->checkBox1->Text = L"Add to Virtual Basement";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			// 
 			// MyForm1
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(530, 635);
+			this->ClientSize = System::Drawing::Size(707, 782);
+			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->pictureBox1);
@@ -402,7 +445,9 @@ namespace Ichoosewine {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox1);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"MyForm1";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"New Wine";
 			this->Load += gcnew System::EventHandler(this, &MyForm1::MyForm1_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
@@ -436,11 +481,13 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	// SAVE BUTTON
-	deleteBoxes();
+	saveToDataBase();
+	
 }
 
 private: void deleteBoxes()
 {
+	
 	//czysci wszystkie wypelnione pola po dodaniu wina do bazy
 	textBox1->Text = "";
 	textBox2->Text = "";
@@ -454,9 +501,45 @@ private: void deleteBoxes()
 	textBox10->Text = "";
 	richTextBox1->Text = "";
 	pictureBox1->Image = nullptr;
+	checkBox1->CheckState = CheckState::Unchecked;
 
 
 }
+
+
+private: void saveToDataBase()
+{ //"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= 'C:\Users\Piotr Skorupa\Desktop\SQL\I choose wine\I choose wine\baza_win.mdf'; Integrated Security=True; Connect Timeout=30"
+	try {
+		if (textBox1->Text != "") {
+			String^ conStr = "server=localhost;user id=root;Password=sraka1234;database=wina_swiata;persist security info=False";
+			MySqlConnection^ connect = gcnew MySqlConnection(conStr);
+			String^ vb = "";
+			if (checkBox1->CheckState == CheckState::Checked) {
+				vb = "VB";
+			}
+			MySqlCommand^ command = gcnew MySqlCommand("INSERT INTO wina_swiata.table2(nazwa, szczep, kraj, producent, kolor, typ, alkohol, rok, cena, sklep, jak, zdj, virtual_basement) VALUES('" + textBox1->Text + "', '" + textBox2->Text + "', '" + textBox3->Text + "', '" + textBox4->Text + "', '" + textBox5->Text + "', '" + textBox6->Text + "', '" + textBox7->Text + "', '" + textBox8->Text + "', '" + textBox9->Text + "', '" + textBox10->Text + "', '" + richTextBox1->Text + "', LOAD_FILE('"+pictureBox1->ImageLocation+"'), '"+vb+"' ) ", connect);
+
+			//otwieranie polaczenia
+			connect->Open();
+			command->ExecuteNonQuery();
+			MessageBox^ mes;
+			mes->Show("Wine has been successfully added !", "Success!");
+			connect->Close();
+			deleteBoxes();
+		}
+		else {
+			MessageBox^ mes;
+			mes->Show("You must enter the name of wine !", "Error!");
+		}
+	}
+	catch (Exception^ e) {
+		MessageBox^ mes;
+		//wypisanie wyjatku
+		mes->Show(e->ToString(), "Database Error!");
+	}
+
+}
+
 
 
 };
