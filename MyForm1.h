@@ -10,7 +10,6 @@ namespace Ichoosewine {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace System::Data::SqlClient;
 	using namespace MySql::Data::MySqlClient;
 
 	/// <summary>
@@ -25,6 +24,7 @@ namespace Ichoosewine {
 			//
 			//TODO: Add the constructor code here
 			//
+			location = "";
 		}
 
 	protected:
@@ -61,7 +61,7 @@ namespace Ichoosewine {
 	private: System::Windows::Forms::TextBox^  textBox8;
 	private: System::Windows::Forms::TextBox^  textBox9;
 	private: System::Windows::Forms::TextBox^  textBox10;
-
+	private: String^ location;
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
 	private: System::Windows::Forms::Button^  button2;
@@ -475,6 +475,10 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	//{
 	pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 	pictureBox1->ImageLocation = ofd->FileName;
+	location = ofd->FileName;
+	
+	location = location->Replace('\\', '/');
+		
 	//}
 	//ofd->Dispose();
 
@@ -511,13 +515,14 @@ private: void saveToDataBase()
 { //"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= 'C:\Users\Piotr Skorupa\Desktop\SQL\I choose wine\I choose wine\baza_win.mdf'; Integrated Security=True; Connect Timeout=30"
 	try {
 		if (textBox1->Text != "") {
-			String^ conStr = "server=localhost;user id=root;Password=sraka1234;database=wina_swiata;persist security info=False";
+			String^ conStr = "server=localhost;user id=root;Password=informatyka;database=wina_swiata;persist security info=False";
 			MySqlConnection^ connect = gcnew MySqlConnection(conStr);
 			String^ vb = "";
 			if (checkBox1->CheckState == CheckState::Checked) {
 				vb = "VB";
 			}
-			MySqlCommand^ command = gcnew MySqlCommand("INSERT INTO wina_swiata.table2(nazwa, szczep, kraj, producent, kolor, typ, alkohol, rok, cena, sklep, jak, zdj, virtual_basement) VALUES('" + textBox1->Text + "', '" + textBox2->Text + "', '" + textBox3->Text + "', '" + textBox4->Text + "', '" + textBox5->Text + "', '" + textBox6->Text + "', '" + textBox7->Text + "', '" + textBox8->Text + "', '" + textBox9->Text + "', '" + textBox10->Text + "', '" + richTextBox1->Text + "', LOAD_FILE('"+pictureBox1->ImageLocation+"'), '"+vb+"' ) ", connect);
+
+			MySqlCommand^ command = gcnew MySqlCommand("INSERT INTO wina_swiata.table4(nazwa, szczep, kraj, producent, kolor, typ, alkohol, rok, cena, sklep, jak, zdj, virtual_basement) VALUES('" + textBox1->Text + "', '" + textBox2->Text + "', '" + textBox3->Text + "', '" + textBox4->Text + "', '" + textBox5->Text + "', '" + textBox6->Text + "', '" + textBox7->Text + "', '" + textBox8->Text + "', '" + textBox9->Text + "', '" + textBox10->Text + "', '" + richTextBox1->Text + "', '"+location+"', '"+vb+"' ) ", connect);
 
 			//otwieranie polaczenia
 			connect->Open();

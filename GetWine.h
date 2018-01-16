@@ -24,6 +24,7 @@ namespace Ichoosewine {
 			//
 			//TODO: Add the constructor code here
 			//
+			location = "";
 		}
 
 	protected:
@@ -72,7 +73,7 @@ namespace Ichoosewine {
 	private: System::Windows::Forms::Button^  button3;
 	private: System::Windows::Forms::Button^  button4;
 	private: System::Windows::Forms::CheckBox^  checkBox1;
-
+	private: String^ location;
 
 	private:
 		/// <summary>
@@ -188,6 +189,7 @@ namespace Ichoosewine {
 			this->pictureBox1->Margin = System::Windows::Forms::Padding(4);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(289, 282);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox1->TabIndex = 49;
 			this->pictureBox1->TabStop = false;
 			// 
@@ -522,9 +524,9 @@ namespace Ichoosewine {
 	private: void pobieranie_z_bazy_do_listy() {
 		
 		try {
-			String^ conStr = "server=localhost;user id=root;Password=sraka1234;database=wina_swiata;persist security info=False";
+			String^ conStr = "server=localhost;user id=root;Password=informatyka;database=wina_swiata;persist security info=False";
 			MySqlConnection^ connect = gcnew MySqlConnection(conStr);
-			MySqlCommand^ command = gcnew MySqlCommand("SELECT nazwa, id, virtual_basement FROM wina_swiata.table2", connect);
+			MySqlCommand^ command = gcnew MySqlCommand("SELECT nazwa, id, virtual_basement FROM wina_swiata.table4", connect);
 			MySqlDataAdapter^ sda = gcnew MySqlDataAdapter(command);
 			DataTable^ ds = gcnew DataTable();
 			sda->Fill(ds);
@@ -550,9 +552,9 @@ namespace Ichoosewine {
 	}
 	private:void pobieranie_do_boxow() {
 		try{	
-		String^ conStr = "server=localhost;user id=root;Password=sraka1234;database=wina_swiata;persist security info=False";
+		String^ conStr = "server=localhost;user id=root;Password=informatyka;database=wina_swiata;persist security info=False";
 		MySqlConnection^ connect = gcnew MySqlConnection(conStr);
-		MySqlCommand^ command = gcnew MySqlCommand("SELECT nazwa, szczep, kraj, producent, kolor, typ, alkohol, rok, cena, sklep, jak, zdj, virtual_basement FROM wina_swiata.table2 WHERE id='"+dane[index]+"'", connect);
+		MySqlCommand^ command = gcnew MySqlCommand("SELECT nazwa, szczep, kraj, producent, kolor, typ, alkohol, rok, cena, sklep, jak, zdj, virtual_basement FROM wina_swiata.table4 WHERE id='"+dane[index]+"'", connect);
 		MySqlDataAdapter^ sda = gcnew MySqlDataAdapter(command);
 		DataTable^ ds = gcnew DataTable();
 		sda->Fill(ds);
@@ -573,11 +575,17 @@ namespace Ichoosewine {
 			if ( check == "VB") {
 				checkBox1->CheckState = CheckState::Checked;
 			}
+			//pictureBox1->Image = gcnew Bitmap(ds->Rows[i][11]->ToString());
+
+			//pictureBox1->Image->FromFile(ds->Rows[i][11]->ToString());
+			pictureBox1->ImageLocation = (ds->Rows[i][11]->ToString());
+			
 			//checkBox1->CheckState = CheckState::Checked;
 			
 			/*array< Byte >^ byteArray = gcnew array< Byte >(1000);
 			for (int j = 0; j < byteArray->Length; j++) {
-				byteArray[j] = (Byte^)(ds->Rows[i][11]->ToString());
+				byteArray[j] = (Byte^)(
+				ds->Rows[i][11]->ToString();
 			}*/
 			//MemoryStream^ ms = gcnew MemoryStream(ds->Rows[i][11]);
 
@@ -618,9 +626,9 @@ namespace Ichoosewine {
 
 	private: void delete_z_bazy() {
 
-		String^ conStr = "server=localhost;user id=root;Password=sraka1234;database=wina_swiata;persist security info=False";
+		String^ conStr = "server=localhost;user id=root;Password=informatyka;database=wina_swiata;persist security info=False";
 		MySqlConnection^ connect = gcnew MySqlConnection(conStr);
-		MySqlCommand^ command = gcnew MySqlCommand("DELETE from wina_swiata.table2 where id='"+dane[index]+"'", connect);
+		MySqlCommand^ command = gcnew MySqlCommand("DELETE from wina_swiata.table4 where id='"+dane[index]+"'", connect);
 		connect->Open();
 		command->ExecuteNonQuery();
 		connect->Close();
@@ -629,11 +637,23 @@ namespace Ichoosewine {
 
 	private: void update_do_bazy() {
 
-		String^ conStr = "server=localhost;user id=root;Password=sraka1234;database=wina_swiata;persist security info=False";
+		String^ vb = "";
+		if (checkBox1->CheckState == CheckState::Checked) {
+			vb = "VB";
+		}
+
+		String^ conStr = "server=localhost;user id=root;Password=informatyka;database=wina_swiata;persist security info=False";
 		MySqlConnection^ connect = gcnew MySqlConnection(conStr);
-		MySqlCommand^ command = gcnew MySqlCommand("UPDATE wina_swiata.table2 SET nazwa ='"+textBox1->Text+"', szczep = '" + textBox2->Text + "', kraj = '" + textBox3->Text + "', producent='" + textBox4->Text + "', kolor='" + textBox5->Text + "', typ='" + textBox6->Text + "', alkohol='" + textBox7->Text + "', rok='" + textBox8->Text + "', cena='" + textBox9->Text + "', sklep='" + textBox10->Text + "', jak='" + richTextBox1->Text + "' WHERE id='"+dane[index]+"'", connect);
 		connect->Open();
-		command->ExecuteNonQuery();
+		if (location=="") {
+			MySqlCommand^ command = gcnew MySqlCommand("UPDATE wina_swiata.table4 SET nazwa ='" + textBox1->Text + "', szczep = '" + textBox2->Text + "', kraj = '" + textBox3->Text + "', producent='" + textBox4->Text + "', kolor='" + textBox5->Text + "', typ='" + textBox6->Text + "', alkohol='" + textBox7->Text + "', rok='" + textBox8->Text + "', cena='" + textBox9->Text + "', sklep='" + textBox10->Text + "', jak='" + richTextBox1->Text + "', virtual_basement='" + vb + "'  WHERE id='" + dane[index] + "'", connect);
+			command->ExecuteNonQuery();
+		}
+		else {
+			MySqlCommand^ command = gcnew MySqlCommand("UPDATE wina_swiata.table4 SET nazwa ='" + textBox1->Text + "', szczep = '" + textBox2->Text + "', kraj = '" + textBox3->Text + "', producent='" + textBox4->Text + "', kolor='" + textBox5->Text + "', typ='" + textBox6->Text + "', alkohol='" + textBox7->Text + "', rok='" + textBox8->Text + "', cena='" + textBox9->Text + "', sklep='" + textBox10->Text + "', jak='" + richTextBox1->Text + "', zdj='" + location + "', virtual_basement='" + vb + "'  WHERE id='" + dane[index] + "'", connect);
+			command->ExecuteNonQuery();
+		}
+		
 		connect->Close();
 
 	}
@@ -688,6 +708,9 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	//{
 	pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 	pictureBox1->ImageLocation = ofd->FileName;
+	location = ofd->FileName;
+
+	location = location->Replace('\\', '/');
 	//}
 	//ofd->Dispose();
 }

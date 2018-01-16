@@ -157,6 +157,7 @@ namespace Ichoosewine {
 	}
 	
 private: System::Void MainMenuWine_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e) {
+	//zamykanie calej aplikacji
 	Application::Exit();
 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
